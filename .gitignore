@@ -1,4 +1,7 @@
 dsenv/
+.venv/
 .ipynb_checkpoints/
 __pycache__/
 .vscode/
+data/hillstrom.db
+data/raw/

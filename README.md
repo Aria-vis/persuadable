@@ -2,9 +2,9 @@
 
 A causal analysis of a randomized email campaign: did the email work, who does it work for, and is it worth targeting? Built on the Hillstrom MineThatData experiment (about 43,000 customers).
 
-**Short answer.** The email raises site visits by 4.5 points. An uplift model ranks customers well (its top half shows a 5.8-point lift against 3.6 for everyone), but at $0.10 per email, emailing everyone is just as good. Targeting pays off once an email effectively costs about $0.30 or more, for example at a gross margin below about a third.
+**Short answer.** The promotional email generated a solid 4.5 percentage-point lift in site visits. While an S-Learner uplift model effectively prioritizes high-responding customers (delivering a 5.8 pp lift in its top deciles versus 3.6 pp overall), at a standard cost of $0.10 per email blanket emailing remains hard to beat. Targeting pays off once an email effectively costs about $0.30 or more, which is a gross margin below roughly 25–35% depending on the estimate (see the memo).
 
-<!-- Add a screenshot after running the app:  ![App screenshot](docs/app.png) -->
+![App screenshot](docs/app.png)
 
 ## The notebooks
 
@@ -80,4 +80,3 @@ Two weeks of outcomes from one retailer. The winning model and the policy compar
 ## Data
 
 Hillstrom MineThatData E-Mail Analytics challenge, loaded through the `scikit-uplift` package.
-

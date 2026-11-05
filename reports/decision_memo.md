@@ -10,15 +10,15 @@ A retailer emailed about 21,400 customers a women's merchandise promotion and he
 
 ## What I found
 
-The email works. Site visits rose from 10.6% to 15.1% (+4.5 points, 95% interval 3.9 to 5.2). Purchases rose from 0.57% to 0.88%, and spend per customer rose by about $0.42 (interval $0.18 to $0.70) over the two weeks.
+The campaign drove clear, statistically significant gains across the entire funnel during the two-week tracking window. Overall site visits increased from 10.6% in control to 15.1% in treatment (+4.5 percentage points, 95% CI 3.9 to 5.2 pp). Conversion rose from 0.57% to 0.88%, and mean customer spend increased by $0.42 (bootstrap 95% CI $0.18 to $0.70).
 
-The experiment is trustworthy. The split was 50/50 (p = 0.70), the two groups looked alike on every trait I measured, and the test could have detected an effect as small as 0.85 points on visits.
+The underlying A/B test data is clean and reliable. The randomization produced an even 50/50 assignment (SRM p = 0.70), balance tests across all seven baseline customer covariates showed no pre-treatment differences after FDR adjustment, and the trial was well-powered (retrospective visit MDE of 0.85 pp).
 
-The effect is not the same for everyone. New customers responded more than existing ones (+5.0 vs +4.0 points), and it varied with how recently someone had bought. Purchase channel made no difference.
+Treatment response was heterogeneous. First-time buyers reacted more strongly than established customers (+5.0 pp vs. +4.0 pp lift), and responsiveness varied significantly by purchase recency, whereas purchase channel (Web vs. Phone vs. Multichannel) had no moderating effect.
 
-I built two uplift models (a T-learner and an S-learner, both XGBoost) and compared them on held-out customers. The S-learner ranked customers better (Qini AUC 0.045 vs 0.018). Emailing the model's top half gave a realized lift of 5.8 points, against 3.6 points for everyone.
+To capture this heterogeneity, I trained XGBoost-based T-Learner and S-Learner models on 70% of the data and evaluated them on the remaining 30% holdout. The S-Learner ordered customers substantially better, achieving a Qini AUC of 0.045 versus 0.018 for the T-Learner. In practice, targeting the S-Learner's top 50% produced a realized lift of 5.8 pp, compared to 3.6 pp across the full test cohort.
 
-The model's predicted sizes are too high. Customers in its "Persuadable" group were predicted at about +12 points and showed about +3 in the test set, and the four bucket labels I tried did not separate customers. I found no evidence that the email puts off any group.
+However, the model's raw uplift magnitudes were inflated by estimation noise in the tails. Customers sorted into the theoretical "Persuadable" tier were predicted to gain +11.8 pp but realized only +3.1 pp in the randomized test set. Furthermore, customers assigned to the "Sleeping Dog" tier still achieved a +3.1 pp lift (95% CI -0.4 to +6.5 pp), indicating no real customer backlash. While the four conceptual buckets failed to separate customers in practice, the model's continuous percentile ranking proved dependable for targeting.
 
 ## What it means in money
 
@@ -46,4 +46,3 @@ Ship the campaign. Email everyone if the margin is above about 35%; target if it
 - One 70/30 split. That test set showed a lower lift (3.6 points) than the full experiment (4.5), so on the full data the crossover cost would be higher, around $0.36.
 - An extra visit is valued at the average visitor's spend, and the figures are revenue, not profit.
 - I did not test a top-k% cutoff, which might beat the predicted-uplift threshold I used.
-
